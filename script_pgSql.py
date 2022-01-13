@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-from numpy.core.records import record
 import pandas as pd
 import requests
 import json
