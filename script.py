@@ -1,33 +1,8 @@
 from bs4 import BeautifulSoup
-from numpy.core.records import record
 import pandas as pd
 import requests
 import json
-import psycopg2
 
-#Establishing connection PostgreSql
-conn = psycopg2.connect(
-   database=database, user='postgres', password=password, host='127.0.0.1', port= '5432'
-)
-conn.autocommit = True
-
-cursor = conn.cursor()
-cursor.execute("DROP TABLE IF EXISTS ScrapedData")
-
-#Creating table
-sql ='''CREATE TABLE ScrapedData(
-   Id SERIAL PRIMARY KEY,
-   URL VARCHAR,
-   Prod_Title VARCHAR,
-   Prod_Price VARCHAR,
-   Prod_img VARCHAR,
-   Prod_Detail VARCHAR
-)'''
-cursor.execute(sql)
-
-
-# ---------------------------
-# Using pandas to extract asin and country code from .csv file
 df = pd.read_csv("Scraping.csv")
 asin = df["Asin"]
 country = df["country"]
@@ -100,17 +75,9 @@ for i in range(0,1000):
     # -----------------
     # Storing data in json format
     json_data.append({f"{i+1}":[data]})
-    # Dumping data in PostgreSql DB
-    sqlCommand = '''INSERT INTO ScrapedData(Id,URL,Prod_Title,Prod_Price,Prod_img,Prod_Detail) VALUES (%s,%s,%s,%s,%s,%s)'''
-    sqldata = (i,data["url"],data["title"],data["price"],data["img"],data["detail"])
-    cursor.execute(sqlCommand,sqldata)
 
 
 # After every 100 iteration data is bumped in json file
-f = open("output_pgSQL.json", 'w')
+f = open("output.json", 'w')
 f.write(json.dumps(json_data,indent=3))
 f.close()
-
-#Commiting and Closing the connection
-conn.commit()
-conn.close()
