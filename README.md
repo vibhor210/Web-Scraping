@@ -14,7 +14,7 @@ psycopg2 is package in python and PostgreSql database adapter. By using this we 
 We can perform curd operation from our code in PostgreSql DB.
 
 # script.py
-Code in this file, will bumped data(which is scraped form the url) in output.json file.
+Code in this file, will store data(which is scraped form the url) in output.json file.
 
 # script_pgSql.py
-Code in this file, will bumped data(which is scraped form the url) in output_pgSql.json file as well as in the postgreSql database.
+Code in this file, will store data(which is scraped form the url) in output_pgSql.json file as well as in the postgreSql database.
