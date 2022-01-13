@@ -17,4 +17,4 @@ We can perform curd operation from our code in PostgreSql DB.
 Code in this file, will bumped data(which is scraped form the url) in output.json file.
 
 # script_pgSql.py
-Code in this file, will bumped data(which is scraped form the url) in output.json file as well as in the postgreSql database.
+Code in this file, will bumped data(which is scraped form the url) in output_pgSql.json file as well as in the postgreSql database.
